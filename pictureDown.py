@@ -1,3 +1,4 @@
+#  download pictures from tieba by using re
 import urllib, urllib2, re, threading
 addr = 'http://tieba.baidu.com/p/250465074?pn='
 page = 7
@@ -16,7 +17,7 @@ for i in range(1, page + 1):
     if urlnames == 0:
         print 'fail'
     for URL in urlnames:
-        name = 'C:\\Users\\Administrator\\Desktop\\test\\test' + repr(count) + '.jpg'
+        name = 'filepath' + repr(count) + '.jpg'
         t = threading.Thread(target = urllib.urlretrieve, args = (URL, name))
         t.start()
         count = count + 1
