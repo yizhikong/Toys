@@ -1,0 +1,9 @@
+H:\code\splitWord\splitWord\bin\Debug\splitWord.exe.config
+H:\code\splitWord\splitWord\bin\Debug\splitWord.exe
+H:\code\splitWord\splitWord\bin\Debug\splitWord.pdb
+H:\code\splitWord\splitWord\obj\Debug\splitWord.csprojResolveAssemblyReference.cache
+H:\code\splitWord\splitWord\obj\Debug\splitWord.CSpliter.resources
+H:\code\splitWord\splitWord\obj\Debug\splitWord.Properties.Resources.resources
+H:\code\splitWord\splitWord\obj\Debug\splitWord.csproj.GenerateResource.Cache
+H:\code\splitWord\splitWord\obj\Debug\splitWord.exe
+H:\code\splitWord\splitWord\obj\Debug\splitWord.pdb
