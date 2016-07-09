@@ -47,29 +47,22 @@ class TaobaoCrawler:
         f.close()
         
     def search(self, query_word):
-        parameter = urllib.urlencode({'q' : query_word.encode('gb2312')})
+        query_dict = {'q' : query_word.encode('gb2312'), 's' : 0}
+        parameter = urllib.urlencode(query_dict)
         url = 'https://s.taobao.com/search?' + parameter
         ids = []
         text = urllib2.urlopen(url).read()
         count = 0
         while text and count < self.MAX_PAGE:
-            #pat = re.compile('g_page_config\s?=\s?({.*})')
             pat = re.compile('"allNids":(\[.*?\])')
             result = pat.search(text)
             ids += eval(result.group(1))
-            soup = BeautifulSoup(text)
-            all_a = soup.find_all('a')
-            print len(all_a)
-            for a in all_a:
-                print a['href']
-            f = open('page.txt', 'w')
-            f.write(str(soup.find_all('script')))
-            f.close()
             # next page
-            next_page = soup.find(attrs={'class':'item next'}).find('a')
+            query_dict['s'] += 44
+            parameter = urllib.urlencode(query_dict)
+            url = 'https://s.taobao.com/search?' + parameter
             try:
-                ['href']
-                text = urllib2.urlopen(next_page).read()
+                text = urllib2.urlopen(url).read()
                 count += 1
             except:
                 text = None
