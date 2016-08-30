@@ -5,6 +5,7 @@ import numpy as np
 import os
 import itchat
 import threading
+import facedetect
 
 class Monitor(object):
 
@@ -22,6 +23,8 @@ class Monitor(object):
         self.setSample()
         self.sender = sender
         self.sendTo = 'filehelper'
+        self.CHECK_INTERVAL = 2
+        self.lastCheckTime = time.time()
         self.monitorThread = threading.Thread(target = self.monitor, args = ())
         self.monitorThread.start()
 
@@ -59,8 +62,14 @@ class Monitor(object):
             if self.isDifferent(gray):
                 if self.status == 0:
                     self.sender.sendMsg('[Alert!]', toUserName = self.sendTo)
-                    # self.check()
+                    #self.check()
                     self.status = 1
+                elif time.time() - self.lastCheckTime > self.CHECK_INTERVAL:
+                    self.lastCheckTime = time.time()
+                    cv2.imwrite('face.jpg', image)
+                    binaryImg = open('face.jpg', 'rb').read()
+                    if len(facedetect.microsoft_detect2(binaryImg)) > 0:
+                        self.check()
             else:
                 if self.status == 1:
                     self.sender.sendMsg('[All clear]', toUserName = self.sendTo)
